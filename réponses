@@ -1,0 +1,109 @@
+// Partie 9 — Auto-évaluation (checklist)
+
+/*
+QUESTION 1: Pouvez-vous expliquer: classe vs instance, propriete vs methode ?
+
+REPONSE:
+- Classe: C'est un plan, un modele qui definit la structure et le comportement d'un objet.
+  Exemple: class Personne { ... }
+
+- Instance: C'est un objet concret cree a partir d'une classe avec le mot-cle "new".
+  Exemple: const p1 = new Personne("Lina", "Durand");
+
+- Propriete: C'est une variable qui stocke une donnee dans l'objet.
+  Exemple: this.nom, this.prenom
+
+- Methode: C'est une fonction associee a l'objet qui definit son comportement.
+  Exemple: nomComplet() { return ... }
+*/
+
+/*
+QUESTION 2: Savez-vous montrer un exemple d'encapsulation avec champ prive # ou getter/setter ?
+
+REPONSE:
+L'encapsulation permet de proteger l'etat interne d'un objet.
+Exemple de la Partie 2 (CompteBancaire):
+- Champ prive: #solde (inaccessible de l'exterieur)
+- Getter: get solde() { return this.#solde; } (permet de lire la valeur)
+- Setter controle: crediter() et debiter() (permet de modifier avec validation)
+
+Autre exemple de la Partie 8 (Article):
+set prix(v) {
+  if (v < 0) throw new Error("Prix invalide");
+  this._prix = v;
+}
+*/
+
+/*
+QUESTION 3: Savez-vous creer une hierarchie simple avec extends et redifinition de methodes ?
+
+REPONSE:
+Oui, avec le mot-cle "extends" et la redifinition (override).
+Exemple de la Partie 4:
+class Animal {
+  parler() { return `${this.nom} fait un bruit`; }
+}
+
+class Chien extends Animal {
+  parler() { return `${this.nom} aboie`; }  // Redefinition
+}
+
+class Chat extends Animal {
+  parler() { return `${this.nom} miaule`; }  // Redefinition
+}
+*/
+
+/*
+QUESTION 4: Quand preferer la composition a l'heritage ? Donnez un exemple.
+
+REPONSE:
+On prefere la composition quand il s'agit d'une relation "a un" (has-a) 
+plutot que "est un" (is-a). La composition est plus flexible.
+
+Exemples de composition dans le code:
+- Panier "a des" Articles (Partie 5)
+- Commande "a un" Client (Partie 6)
+- Bibliotheque "a des" Livres et "a des" Membres (Partie 7)
+- Catalogue "a des" categories de Livres (Partie 8)
+
+Exemple d'heritage (plus rigide):
+- Chien "est un" Animal
+- Voiture "est un" Vehicule
+
+Regle: Utiliser l'heritage pour les relations "est un", 
+et la composition pour les relations "a un".
+*/
+
+/*
+QUESTION 5: Votre code verifie-t-il des invariants et leve-t-il des erreurs claires ?
+
+REPONSE:
+Oui, a plusieurs endroits dans le code:
+
+Partie 2 (CompteBancaire):
+- if (soldeInitial < 0) throw new Error("Solde initial invalide")
+- if (montant > this.#solde) throw new Error("Fonds insuffisants")
+
+Partie 3 (Article):
+- if (prix < 0 || stock < 0) throw new Error("Valeurs invalides")
+
+Partie 7 (Bibliotheque):
+- if (!livre.estDisponible()) throw new Error("Livre indisponible")
+- if (!membre.peutEmprunter()) throw new Error("Quota atteint (3 livres maximum)")
+
+Partie 8 (Article avec setter):
+- if (v < 0) throw new Error("Prix invalide: ne peut pas etre negatif")
+
+Chaque erreur a un message clair qui explique le probleme.
+*/
+
+// RESUME DES CONCEPTS CLES
+/*
+1. Classe = plan, Instance = objet cree avec new
+2. Propriete = donnee, Methode = fonction
+3. Encapsulation = proteger avec # et get/set
+4. Heritage = reutiliser avec extends
+5. Polymorphisme = meme methode, comportement different
+6. Composition = "a un" (plus flexible que l'heritage)
+7. Invariants = verifier avec throw Error
+*/
